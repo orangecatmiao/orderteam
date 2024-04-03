@@ -1,0 +1,22 @@
+<div  class="col-xl-9 col-lg-10 col-md-11 col-sm-12 col-xs-12 create-frame">
+    <a href="/page/create-order" target="_blank">
+        <button class="btn btn-secondary" style="width:100%"> {{ 'CREATE_ORDER.CREATE_A_ORDER' | translate }} </button>
+    </a>
+    <a href="https://www.youtube.com/watch?v=RNhsw0VqnVM" target="_blank" style="float:right;margin-top: 5px"><!--[href]="photoUrl+'/howtouse'" -->
+        <i class="fas fa-file-alt"></i> {{ 'CREATE_ORDER.MANUAL' | translate }} 
+    </a>
+</div>
+
+<div *ngIf="is_no_order" class="no-order">
+    <h1>此訂單不存在</h1>
+</div>
+
+<div *ngIf="!is_no_order">
+    <app-member  [hidden]="is_total"  [is_total]="is_total" [titleInfo]="titleInfo" [order_list]="order_list" [charge]="charge" (voted)="onVoted($event)"></app-member>
+    <app-total [hidden]="!is_total" [is_total]="is_total" [titleInfo]="titleInfo" [order_list]="order_list" [charge]="charge" (voted)="onVoted($event)"></app-total>
+</div>
+
+
+
+
+<div style="text-align: center">{{ 'ANNOUNCEMENT'| translate }}</div>

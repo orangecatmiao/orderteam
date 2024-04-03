@@ -1,0 +1,81 @@
+
+<div class=" col-md-10 col-12" style="margin:auto;margin-bottom:150px;max-width: 680px;">
+    <div style="text-align: center">
+        <h3>{{ 'CREATE_ORDER.CREATE' | translate }} </h3> 
+       <div style="margin: 5px 0">
+            <a href="https://www.youtube.com/watch?v=RNhsw0VqnVM" target="_blank"><!--[href]="photoUrl+'/howtouse'"-->
+                <i class="fas fa-file-alt"></i> {{ 'CREATE_ORDER.MANUAL' | translate }} 
+            </a>
+       </div>
+    </div>
+    <table [hidden]="qr_code_show" class="table table-bordered table-hover">
+        <tr>
+            <td class="create-order-title">{{ 'CREATE_ORDER.MANAGER' | translate }} </td>
+            <td>
+                <input [(ngModel)]="charge_name" type="text" class="form-control" [placeholder]="'CREATE_ORDER.PLACEHOLDER_MANAGER' | translate ">
+                <div class="err-msg"> {{ errorMsg.charge_name }} </div>
+            </td>
+        </tr>
+        <tr>
+            <td> {{ 'CREATE_ORDER.STORE' | translate }} </td>
+            <td>
+                <input [(ngModel)]="store_name" type="text" class="form-control"  [placeholder]="'CREATE_ORDER.PLACEHOLDER_STORE' | translate ">
+                <div class="err-msg"> {{ errorMsg.store_name }} </div>
+            </td>
+        </tr>
+        <tr>
+            <td>{{ 'CREATE_ORDER.END_TIME' | translate }}  &nbsp; <span class="badge badge-danger" style="margin:3px 0">{{ 'CREATE_ORDER.24HR' | translate }} </span></td>
+            <td>
+               <!-- <input  id='datetimepicker3' [(ngModel)]="end" type="text" class="form-control" [placeholder]="'CREATE_ORDER.PLACEHOLDER_END_TIME' | translate ">-->
+               <p-calendar [(ngModel)]="end" dateFormat="yy/mm/dd" 
+                [showTime]="true" [locale]="locale"  [placeholder]="'CREATE_ORDER.PLACEHOLDER_END_TIME' | translate " 
+                [title]="'CREATE_ORDER.PLACEHOLDER_END_TIME' | translate"></p-calendar>
+
+            </td>
+        </tr>
+        <tr>
+            <td>{{ 'REMARK' | translate }} </td>
+            <td>
+                <input [(ngModel)]="remark" type="text" class="form-control" [placeholder]="'CREATE_ORDER.PLACEHOLDER_REMARK' | translate ">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="10"><button class="btn btn-primary" (click)="checkFile()" style="width:100%">{{ 'CREATE_ORDER.BTN_CREATE_TEAM' | translate }} </button></td>
+        </tr>
+    </table>
+    
+    <!--QR code顯示 -->
+    <table [hidden]="!qr_code_show"  [hidden]="urlObj.member_qrcode==null || urlObj.charge_qrcode==null" class="table table-bordered">
+        <tr>
+            <td>{{ 'CREATE_ORDER.MANAGER' | translate }}: {{ charge_name2 }}</td>
+        </tr>
+        <tr>
+            <td>{{ 'CREATE_ORDER.STORE' | translate }}: {{ store_name2 }}</td>
+        </tr>
+        <tr>
+            <td>
+                <div>{{ 'CREATE_ORDER.ORDER_MEMBER' | translate }} </div>
+                <div><a [href]=" photoUrl + '/page/order-list/' + urlObj.member_qrcode" target="_blank">{{ photoUrl + '/page/order-list/' + urlObj.member_qrcode }}</a></div>
+                <div style="width:100%;text-align: center;margin: 10px 0 0 0;">
+                    <div id="member-qrcode" style="display: inline-block"></div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div>{{ 'CREATE_ORDER.ORDER_MANAGER' | translate }} </div>
+                <div>
+                    <a [href]="photoUrl + '/page/order-list/'+  urlObj.member_qrcode + '/' + urlObj.charge_qrcode" target="_blank">
+                        {{ photoUrl + '/page/order-list/'+  urlObj.member_qrcode + '/' + urlObj.charge_qrcode }}
+                    </a>
+                </div>
+               
+                <div style="width:100%;text-align: center;margin: 10px 0 0 0;">
+                    <div id="charge-qrcode" style="display: inline-block"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <div style="text-align: center">{{ 'ANNOUNCEMENT'| translate }}</div> 
+</div>
